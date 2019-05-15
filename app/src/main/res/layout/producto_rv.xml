@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre Producto"
+            android:gravity="center"
+            android:id="@+id/tvNombreProducto"
+            android:textSize="25dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cantidad: 10"
+                android:textSize="15dp"
+                android:id="@+id/tvCantidad"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvPrecio"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:text="Precio unidad : 21.15"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <ImageButton
+                android:background="@drawable/plus"
+                android:id="@+id/btnAgregar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="50dp"
+                />
+
+            <ImageButton
+                android:background="@drawable/minus"
+                android:id="@+id/btnEliminar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
