@@ -17,8 +17,9 @@ public class MyHilo extends Thread {
     @Override
     public void run(){
         Message mensaje = new Message();
-        Log.d("IP", this.url);
+
         String respuesta = HttpConection.conectarseString(this.url);
+        Log.d("respuesta", respuesta);
         mensaje.obj = XmlParser.obtenerPersonas(respuesta);
         this.handler.sendMessage(mensaje);
 

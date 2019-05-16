@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
         rvProductos.setLayoutManager(lm);
 
         this.handler = new Handler(this);
-        MyHilo hiloUno = new MyHilo(handler,"192.168.0.66:8080/Productos.xml");
+        MyHilo hiloUno = new MyHilo(handler,"https://onemoretry.eu/temp/Productos.xml");
         hiloUno.start();
 
 
@@ -54,8 +54,13 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
 
     @Override
     public boolean handleMessage(Message msg) {
-
-        //Log.d("Respuesta Conexion" ,msg.obj.toString());
+/*
+        for (Producto p: (List<Producto>)msg.obj){
+            Log.d("desde el hilo texto",p.toString());
+        }
+*/
+        this.productos.addAll((List<Producto>)msg.obj);
+        this.myAdapter.notifyDataSetChanged();
         return false;
     }
 }

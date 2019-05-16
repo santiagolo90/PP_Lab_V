@@ -28,32 +28,26 @@ public class XmlParser {
                 if (event == XmlPullParser.START_TAG){
                     if ("producto".equals(xmlPullParser.getName())){
                         p = new Producto();
-                        switch(xmlPullParser.getName()) {
-                            case "id":
-                                p.setId(Integer.valueOf(xmlPullParser.nextText()));
-                                break;
-                            case "nombre":
-                                p.setNombre(xmlPullParser.nextText());
-                                break;
-                            case "precio":
-                                p.setPrecio(Integer.valueOf(xmlPullParser.nextText()));
-                                break;
-                            case "cantidad":
-                                p.setCantidad(Integer.valueOf(xmlPullParser.nextText()));
-                                break;
-                            default:
-                                // code block
-                        }
                     }
-
+                    if ("id".equals(xmlPullParser.getName()) && p != null){
+                        p.setId(Integer.valueOf(xmlPullParser.nextText()));
+                    }
+                    if ("nombre".equals(xmlPullParser.getName())&& p != null){
+                        p.setNombre(xmlPullParser.nextText());
+                    }
+                    if ("precio".equals(xmlPullParser.getName())&& p != null){
+                        p.setPrecio(Double.valueOf(xmlPullParser.nextText()));
+                    }
+                    if ("cantidad".equals(xmlPullParser.getName())&& p != null){
+                        p.setCantidad(Integer.valueOf(xmlPullParser.nextText()));
+                    }
                 }
                 if (event == XmlPullParser.END_TAG){
-                    if ("producto".equals(xmlPullParser.getName()) || p != null) {
+                    if ("producto".equals(xmlPullParser.getName()) && p != null) {
                         productos.add(p);
+                        p = null;
                     }
                 }
-
-                
                 event = xmlPullParser.next();
             }
 
