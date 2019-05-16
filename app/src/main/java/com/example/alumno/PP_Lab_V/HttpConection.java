@@ -20,12 +20,15 @@ import java.net.URLEncoder;
  */
 
 public class HttpConection {
+    private String metodo;
+    private JSONObject datos;
+    private String Header;
+
 
     public HttpConection(String metodo) {
         this.metodo = metodo;
     }
 
-    private String metodo;
 
     public JSONObject getDatos() {
         return datos;
@@ -35,33 +38,51 @@ public class HttpConection {
         this.datos = datos;
     }
 
-    private JSONObject datos;
-    private String Header;
 
 
 
-    public byte[] getBytesData(String strUrl) throws IOException {
-        URL url = new URL(strUrl);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+    public static byte[] conectarseImagen(String miUrl){
 
-        urlConnection.setRequestMethod(this.metodo);
-        urlConnection.connect();
-        int response = urlConnection.getResponseCode();
-        Log.d("http", "Response code:" + response);
-        if(response==200) {
-            InputStream is = urlConnection.getInputStream();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int length = 0;
-            while ((length = is.read(buffer)) != -1) {
-                baos.write(buffer, 0, length);
-            }
-            is.close();
-            return baos.toByteArray();
-        }
-        else
-            throw new IOException();
+        return getBytesData(miUrl);
     }
+
+    public static String conectarseString(String miUrl){
+        String respuesta = new String(getBytesData(miUrl));
+        return respuesta;
+
+    }
+
+
+
+    public static byte[] getBytesData(String strUrl) {
+        try {
+            URL url = new URL(strUrl);
+            HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+            int response = urlConnection.getResponseCode();
+            Log.d("http", "Response code:" + response);
+            if (response == 200){
+                //enlace de comunicacion lo uso para leer
+                InputStream is = urlConnection.getInputStream();
+                // esta en el servidor porque no tiene new
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int length = 0;
+                while ((length = is.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+                is.close();
+                return baos.toByteArray();
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+
+    }
+
 
     public String getStringData(String strUrl) throws IOException {
         URL url = new URL(strUrl);
@@ -99,3 +120,4 @@ public class HttpConection {
             throw new IOException();
     }
 }
+
