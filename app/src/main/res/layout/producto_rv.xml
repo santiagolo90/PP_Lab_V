@@ -47,20 +47,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center">
-            <ImageButton
+
+            <Button
                 android:background="@drawable/plus"
                 android:id="@+id/btnAgregar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="50dp"
-                />
+                android:layout_marginRight="50dp"/>
 
-            <ImageButton
+            <Button
                 android:background="@drawable/minus"
                 android:id="@+id/btnEliminar"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
-                />
+                android:layout_height="30dp"/>
+
         </LinearLayout>
 
     </LinearLayout>

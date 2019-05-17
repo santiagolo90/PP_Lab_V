@@ -27,14 +27,6 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
 
 
         productos = new ArrayList<Producto>();
-        productos.add(new Producto(1,"producto 1",10,11.15));
-        productos.add(new Producto(2,"producto 2",20,21.25));
-        productos.add(new Producto(3,"producto 3",30,31.35));
-        productos.add(new Producto(4,"producto 4",40,41.45));
-        productos.add(new Producto(5,"producto 5",50,51.55));
-        productos.add(new Producto(6,"producto 6",60,61.65));
-        productos.add(new Producto(7,"producto 7",70,71.75));
-        productos.add(new Producto(8,"producto 8",80,81.85));
 
         RecyclerView rvProductos = (RecyclerView) super.findViewById(R.id.rvProductos);
 
@@ -62,5 +54,20 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
         this.productos.addAll((List<Producto>)msg.obj);
         this.myAdapter.notifyDataSetChanged();
         return false;
+    }
+
+    public void controlStock(Producto p, String tipoBtn) {
+        int index = this.productos.indexOf(p);
+        //int index2 = p.getId() -1;
+        if ("agregar".equals(tipoBtn)){
+            Log.d(tipoBtn, p.toString());
+            Number suma =  (int)p.getCantidad() + 1;
+            p.setCantidad(suma);
+        } else if ("eliminar".equals(tipoBtn)) {
+            Log.d(tipoBtn, p.toString());
+            Number resta =  (int)p.getCantidad() - 1;
+            p.setCantidad(resta);
+        }
+        this.myAdapter.notifyItemChanged(index);
     }
 }

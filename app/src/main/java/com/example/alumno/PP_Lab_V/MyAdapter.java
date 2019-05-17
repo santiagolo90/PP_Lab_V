@@ -24,13 +24,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHoleder> {
         this.miapp = mipp;
     }
 
+    public MainActivity getMiapp() {
+        return miapp;
+    }
+
     @Override
     public MyViewHoleder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View v =null;
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.producto_rv,parent,false);
 
-        MyViewHoleder myViewHoleder = new MyViewHoleder(v);
+        MyViewHoleder myViewHoleder = new MyViewHoleder(v , miapp);
 
         return myViewHoleder;
     }
