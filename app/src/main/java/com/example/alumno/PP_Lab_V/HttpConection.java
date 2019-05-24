@@ -5,10 +5,12 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -47,6 +49,7 @@ public class HttpConection {
     }
 
     public static String conectarseString(String miUrl){
+        //Log.d("http22", "Response code:" + miUrl);
         String respuesta = new String(getBytesData(miUrl));
         return respuesta;
 
@@ -61,7 +64,7 @@ public class HttpConection {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
             int response = urlConnection.getResponseCode();
-            Log.d("http", "Response code:" + response);
+            Log.d("http11", "Response code:" + response);
             if (response == 200){
                 //enlace de comunicacion lo uso para leer
                 InputStream is = urlConnection.getInputStream();
@@ -120,97 +123,5 @@ public class HttpConection {
             throw new IOException();
     }
 
-
-
-/*
-    @Override
-    protected String doInBackground(String... miUrl) {
-        HttpURLConnection connection = null;
-        BufferedReader reader = null;
-
-        try {
-            URL url = new URL(miUrl[0]);
-            connection = (HttpURLConnection) url.openConnection();
-            connection.connect();
-
-
-            InputStream stream = connection.getInputStream();
-
-            reader = new BufferedReader(new InputStreamReader(stream));
-
-            //StringBuffer buffer = new StringBuffer();
-            StringBuilder sb = new StringBuilder();
-            String line = "";
-
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append('\n');
-            }
-
-            String buffer = sb.toString();
-            return buffer;
-
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-    */
-/*
-    @Deprecated
-    protected void convertToJson(String datos) {
-        carrusels = new ArrayList<Carrusel>();
-        try {
-
-            JSONArray jsonarray = new JSONArray(datos);
-            //ArrayList<HashMap<String, String>> personas = new ArrayList<>();
-
-            for (int i = 0; i < jsonarray.length(); i++) {
-                JSONObject c = jsonarray.getJSONObject(i);
-                Number idCarrusel = c.getInt("idCarrusel");
-                String titulo = c.getString("titulo");
-                String subtitulo = c.getString("subtitulo");
-                String orden = c.getString("orden");
-                String tipo_carrusel = c.getString("tipo_carrusel");
-                String foto = c.getString("foto");
-
-                carrusels.add(new Carrusel(idCarrusel,titulo,subtitulo,orden,tipo_carrusel,foto));
-
-                // tmp hash map for json
-                //HashMap<String, String> myCarusel = new HashMap<>();
-
-                // adding each child node to HashMap key => value
-                //myCarusel.put("idCarrusel", idCarrusel);
-                //myCarusel.put("titulo", titulo);
-                //myCarusel.put("subtitulo", subtitulo);
-                //myCarusel.put("tipo_carrusel", tipo_carrusel);
-                //myCarusel.put("foto", foto);
-                //personas.add(myCarusel);
-                //return myCarusel;
-
-            }
-
-            //for (int i = 0; i < carrusels.size(); i++) {
-            //    Log.d("lista",String.valueOf(carrusels.get(i)));
-            //}
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
- */
 }
 
